@@ -1,0 +1,972 @@
+[{
+    "comment": "// This code is to only be used by the M150V team or JAaMDG and is not subject to copying, distributing, or use on other aircraft without permission from the developers.",
+    "mass": 2500,
+    "dragFactor": 0.1,
+    "tensorFactor": 1,
+    "com": [0, 0, 0],
+    "zeroRPMAltitude": 100000,
+    "minRPM": 1000,
+    "maxRPM": 10000,
+    "driveRatio": 0.05,
+    "engineInertia": 0.6,
+    "gearTravelTime": 5,
+    "startupTime": 20,
+    "shutdownTime": 10,
+    "optionalAnimatedPartTravelTime": 2,
+
+    "startAltitude": 1.5,
+    "startTilt": -4,
+    "minimumSpeed": 0,
+
+  	"instruments": {
+  		"airspeedJet": {
+		    "animations": [
+          {"value": "view", "type": "show", "notEq": "cockpit"}
+        ]
+  		},
+      "attitudeJet": {
+        "animations": [
+          {"value": "view", "type": "show", "notEq": "cockpit"}
+        ]
+      },
+  		"altitude": {
+        "animations": [
+          {"value": "view", "type": "show", "notEq": "cockpit"}
+        ]
+      },
+      "compass": {
+        "animations": [
+          {"value": "view", "type": "show", "notEq": "cockpit"}
+        ]
+      },
+  		"varioJet": {
+        "animations": [
+          {"value": "view", "type": "show", "notEq": "cockpit"}
+        ]
+      },
+
+  		"brakes": "",
+  		"gear": "",
+
+        "pfd": {
+            "overlay": {
+                "url": "https://jaamdg.weebly.com/uploads/1/2/9/0/129066664/pfd_orig.png",
+                "size": {
+                    "x": 200,
+                    "y": 200
+                },
+                "anchor": {
+                    "x": 256,
+                    "y": 256
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "drawOrder": 1,
+                "rescale": true,
+                "rescalePosition": true,
+                "overlays": [
+                    {
+                        "animations": [
+                            {
+                                "type": "rotate",
+                                "value": "aroll",
+                                "ratio": -1,
+                                "min": -180,
+                                "max": 180
+                            },
+                            {
+                                "type": "translateY",
+                                "value": "atilt",
+                                "ratio": -2,
+                                "offset": 330,
+                                "min": -90,
+                                "max": 90
+                            }
+                        ],
+                        "url": "https://jaamdg.weebly.com/uploads/1/2/9/0/129066664/attitude-jet-hand_orig.png",
+                        "anchor": {
+                            "x": 100,
+                            "y": 70
+                        },
+                        "size": {
+                            "x": 180,
+                            "y": null
+                        },
+                        "position": {
+                            "x": -16,
+                            "y": 8
+                        },
+                        "drawOrder": 0,
+                        "iconFrame": {
+                            "x": 200,
+                            "y": 140
+                        }
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "value": "kias",
+                                "ratio": 2.1,
+                                "offset": 0,
+                                "min": 0,
+                                "max": 1200
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/kias.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 100
+                        },
+                        "size": {
+                            "x": 30,
+                            "y": 100
+                        },
+                        "position": {
+                            "x": -98,
+                            "y": 14
+                        },
+                        "iconFrame": {
+                            "x": 40,
+                            "y": 170
+                        },
+                        "drawOrder": 1
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "function": "{return geofs.animation.values['altThousands'] = geofs.animation.values['altitude'] % 10000}",
+                                "ratio": 0.2385,
+                                "offset": 260,
+                                "min": 0,
+                                "max": 100000
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/altitude.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 15,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 51,
+                            "y": -44
+                        },
+                        "iconFrame": {
+                            "x": 32,
+                            "y": 220
+                        },
+                        "drawOrder": 1
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "value": "altThousands",
+                                "ratio": 0.238,
+                                "offset": 75,
+                                "min": 0,
+                                "max": 100000
+                            },
+                            {
+                                "type": "translateX",
+                                "function": "{return Math.floor(geofs.animation.values['altitude'] % 100000 / 10000); }",
+                                "ratio": -22.7,
+                                "min": 0,
+                                "max": 100000
+                            }
+                        ],
+                        "name": "altten",
+                        "url": "images/instruments/a380pfd/altitudetens.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 100,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 47,
+                            "y": -44
+                        },
+                        "iconFrame": {
+                            "x": 10,
+                            "y": 220
+                        },
+                        "drawOrder": 1
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "rotate",
+                                "function": "{geofs.animation.values['climbrateABS'] = Math.abs(geofs.animation.values['climbrate']); geofs.animation.values['climbrateLog'] = Math.sign(geofs.animation.values['climbrate']) * Math.log(geofs.animation.values['climbrateABS']); return geofs.animation.values['climbrateLog']}",
+                                "ratio": -8.6,
+                                "offset": 0,
+                                "min": -8.7,
+                                "max": 8.7
+                            },
+                            {
+                                "type": "scaleX",
+                                "value": "climbrateABS",
+                                "ratio": 0.005,
+                                "offset": 0,
+                                "min": 1500,
+                                "max": 5000
+                            },
+                            {
+                                "type": "moveY",
+                                "value": "climbrateLog",
+                                "ratio": 3.8,
+                                "offset": 0,
+                                "min": -8.7,
+                                "max": 8.7
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/vario.png",
+                        "anchor": {
+                            "x": 50,
+                            "y": 2
+                        },
+                        "size": {
+                            "x": 10,
+                            "y": 2
+                        },
+                        "position": {
+                            "x": 90,
+                            "y": 7
+                        },
+                        "drawOrder": 1
+                    },
+                    {
+                        "url": "images/instruments/a380pfd/altitude-mask.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 30,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 43,
+                            "y": -1
+                        },
+                        "drawOrder": 1
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "function": "{return geofs.animation.values['altitude'] % 100}",
+                                "ratio": 0.83,
+                                "offset": 0
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/tenfeet.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 9,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 62,
+                            "y": 1
+                        },
+                        "iconFrame": {
+                            "x": 20,
+                            "y": 35
+                        },
+                        "drawOrder": 2
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "function": "{return Math.floor(geofs.animation.values['altitude'] % 1000 / 100)}",
+                                "ratio": 23,
+                                "offset": 5
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/digits.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 6,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 55,
+                            "y": 2
+                        },
+                        "iconFrame": {
+                            "x": 11,
+                            "y": 23
+                        },
+                        "drawOrder": 2
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "function": "{return Math.floor(geofs.animation.values['altitude'] % 10000 / 1000)}",
+                                "ratio": 23,
+                                "offset": 5
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/digits.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 6,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 50,
+                            "y": 2
+                        },
+                        "iconFrame": {
+                            "x": 11,
+                            "y": 23
+                        },
+                        "drawOrder": 2
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateY",
+                                "function": "{return Math.floor(geofs.animation.values['altitude'] % 100000 / 10000)}",
+                                "ratio": 23,
+                                "offset": 5
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/digits.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 6,
+                            "y": null
+                        },
+                        "position": {
+                            "x": 45,
+                            "y": 2
+                        },
+                        "iconFrame": {
+                            "x": 11,
+                            "y": 23
+                        },
+                        "drawOrder": 2
+                    },
+                    {
+                        "animations": [
+                            {
+                                "type": "translateX",
+                                "value": "heading360",
+                                "ratio": -2.64,
+                                "offset": 0
+                            }
+                        ],
+                        "url": "images/instruments/a380pfd/compass.png",
+                        "anchor": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "size": {
+                            "x": 600,
+                            "y": null
+                        },
+                        "position": {
+                            "x": -60,
+                            "y": -87
+                        },
+                        "iconFrame": {
+                            "x": 160,
+                            "y": 25
+                        },
+                        "drawOrder": 1
+                    }
+                ]
+            },
+            "cockpit": {
+                "position": [
+                    0.29,
+                    3.4,
+                    -0.03
+                ],
+                "scale": 1.1
+            },
+            "animations": [
+                {
+                    "value": "view",
+                    "type": "show",
+                    "eq": "cockpit"
+                }
+            ]
+        }
+    },
+
+    "parts": [
+
+        {
+            "name": "root",
+            "type": "root",
+            "position": [0, 0, 0],
+            "model": "S97v2.glb"
+        },
+
+        {
+            "name": "forwardbodyvertical",
+            "type": "airfoil",
+            "position": [0, 2, 0],
+            "area": 0.5,
+            "forceDirection": "X",
+            "points": {
+                "forceSourcePoint": [0, 0, 0]
+            }
+        },
+
+        {
+            "name": "forwardbodyhorizontal",
+            "type": "airfoil",
+            "position": [0, 2, 0],
+            "area": 0.1,
+            "forceDirection": "Z",
+            "points": {
+                "forceSourcePoint": [0, 0, 0]
+            }
+        },
+
+        {
+            "name": "body",
+            "type": "airfoil",
+            "position": [0, 0, 0],
+            "area": 0.5,
+            "forceDirection": "X",
+            "points": {
+                "forceSourcePoint": [0, 0, 0]
+            },
+            "collisionPoints": [
+                [-1, 3.1, -0.4],
+                [1, 3.1, -0.4],
+                [-1, -6.5, -0.1],
+                [1, -6.5, -0.1],
+                [0, 3.1, 3],
+                [0, -6.5, 3],
+                [-2.5, -7, 1.2],
+                [2.5, -7, 1.2],
+                [-2.5, -7, -1],
+                [2.5, -7, -1]
+
+            ]
+        },
+
+        {
+            "name": "skidRightFront",
+            "type": "wheel",
+            "node": "gearR",
+            "position": [0, 0, 0],
+            "collisionPoints": [
+                [1, 2, -1.8]
+            ],
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": -170, "delay": -0.5}
+            ],
+            "suspension": {
+                "motion": "rotation",
+                "axis": "Y",
+                "ratio": 1,
+                "stiffness": 65,
+                "damping": 3
+            }
+        },
+
+        {
+            "name": "skidLeftFront",
+            "type": "wheel",
+            "node": "gearL",
+            "position": [0, 0, 0],
+            "collisionPoints": [
+                [-1, 2, -1.8]
+            ],
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": 170, "delay": -0.5}
+            ],
+            "suspension": {
+                "motion": "rotation",
+                "axis": "Y",
+                "ratio": 1,
+                "stiffness": 65,
+                "damping": 3
+            }
+        },
+        {
+            "name": "pistRightFront",
+            "type": "none",
+            "node": "pistonR",
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": 30, "delay": 0.5}
+            ]
+        },
+
+        {
+            "name": "pistLeftFront",
+            "type": "none",
+            "node": "pistonL",
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": -30, "delay": 0.5}
+            ]
+        },
+        {
+            "name": "leftStickL",
+            "type": "none",
+            "node": "leftYokeL",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "rawPitch", "ratio": -20},
+                {"type": "rotate", "axis": "Z", "value": "roll", "ratio": 40}
+            ]
+        },
+
+        {
+            "name": "rightStickL",
+            "type": "none",
+            "node": "rightYokeL",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "rawPitch", "ratio": -20},
+                {"type": "rotate", "axis": "Z", "value": "roll", "ratio": 40}
+            ]
+        },
+        {
+            "name": "leftStickR",
+            "type": "none",
+            "node": "leftYokeR",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "rawPitch", "ratio": -20},
+                {"type": "rotate", "axis": "Z", "value": "roll", "ratio": 40}
+            ]
+        },
+
+        {
+            "name": "rightStickR",
+            "type": "none",
+            "node": "rightYokeR",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "rawPitch", "ratio": -20},
+                {"type": "rotate", "axis": "Z", "value": "roll", "ratio": 40}
+            ]
+        },
+
+        {
+            "name": "throttle",
+            "type": "none",
+            "node": "throttle",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "throttle", "ratio": 70, "min": 0.001}
+            ]
+        },
+
+        {
+            "name": "doorTL",
+            "type": "none",
+            "node": "gearLDoorT",
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": -45, "delay": 0.8}
+            ]
+        },
+
+        {
+            "name": "doorTR",
+            "type": "none",
+            "node": "gearRDoorT",
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": 45, "delay": 0.8}
+            ]
+        },
+        {
+            "name": "doorBL",
+            "type": "none",
+            "node": "gearLDoorB",
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": 90, "delay": 0.8}
+            ]
+        },
+
+        {
+            "name": "doorBR",
+            "type": "none",
+            "node": "gearRDoorB",
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "gearPosition", "ratio": -90, "delay": 0.8}
+            ]
+        },
+
+        {
+            "name": "skidBack",
+            "type": "wheel",
+            "node": "tailGear",
+            "position": [0, 0, 0],
+            "collisionPoints": [
+                [0, -4.9, -1.8]
+            ],
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "gearPosition", "ratio": -90, "delay": -0.5}
+        ],
+            "suspension": {
+                "stiffness": 25,
+                "damping": 0.5
+            }
+    },
+        
+    {
+        "name": "geardrag",
+        "type": "airfoil",
+        "position": [0, 0, 0],
+        "liftFactor": 4,
+        "dragFactor": 10,
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        },
+        "animations": [
+            {"type": "rotate", "frame": "parent", "axis": "X", "value": "gearPosition", "ratio": -90}
+        ],
+        "rotation": [90, 0, 0]
+    },
+
+
+    {
+        "name": "rotorT",
+        "type": "frame",
+		"node": "topRotor",
+        "animations": [
+			{"type": "rotate", "axis": "Y", "value": "prop", "ratio": -1}
+        ]
+    },
+    {
+        "name": "rotorB",
+        "type": "frame",
+		"node": "bottomRotor",
+        "animations": [
+			{"type": "rotate", "axis": "Y", "value": "prop", "ratio": 1}
+        ]
+       },
+    {
+        "name": "rotorBack",
+        "type": "frame",
+		"node": "tailRotor",
+        "animations": [
+			{"type": "rotate", "axis": "Z", "value": "prop", "ratio": 1}
+        ]
+       },
+       {
+        "name": "tailrotor",       
+        "type": "engine",
+        "thrust": -200,
+        "position": [0, -7, 0],
+        "forceDirection": "X",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        },
+        "animations": [
+             {"type": "rotate", "axis": "X", "value": "prop", "ratio": -1},
+            {"type": "throttle", "value": "throttle", "ratio": 0.05, "offset": 0.95, "fmax":  1.1},
+            {"type": "pitch", "value": "rawYaw"}
+        ]
+    },
+
+    {
+        "comment": "// Rotor Airfoil (4 sections with dihedral)",
+        "name": "rotorAirfoilFront",
+        "type": "airfoil",
+        "area": 1.5,
+        "position": [0, 2, 1.8],
+        "rotation": [-3, 0, 0],
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        }
+    },
+    {
+        "name": "rotorAirfoilRight",
+        "type": "airfoil",
+        "area": 1.5,
+        "position": [2, 0, 1.8],
+        "rotation": [0, 3, 0],
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        }
+    },
+    {
+        "name": "rotorAirfoilBack",
+        "type": "airfoil",
+        "area": 1.5,
+        "position": [0, -2, 1.8],
+        "rotation": [3, 0, 0],
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        }
+    },
+    {
+        "name": "rotorAirfoilLeft",
+        "type": "airfoil",
+        "area": 1.5,
+        "position": [-2, 0, 1.8],
+        "rotation": [0, -3, 0],
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        }
+    },
+
+    {
+        "name": "cyclicRotorPositive",
+        "type": "engine",
+        "thrust": 500,
+        "rotation": [0, 0, 0],
+        "position": [0, 0, 1.8],
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        },
+        "animations": [
+            {"type": "translate", "axis": "Y", "value": "pitch", "ratio": 7},
+            {"type": "translate", "axis": "X", "value": "roll", "ratio": -7},
+
+            {"type": "throttle", "value": "throttle", "ratio": 0, "offset": 1.0, "fmax":  1.0}
+        ]
+    },
+
+    {
+        "name": "cyclicRotorNegative",
+        "type": "engine",
+        "thrust": -500,
+        "rotation": [0, 0, 0],
+        "position": [0, 0, 1.8],
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        },
+        "animations": [
+            {"type": "translate", "axis": "Y", "value": "pitch", "ratio": -7},
+            {"type": "translate", "axis": "X", "value": "roll", "ratio": 7},
+
+            {"type": "throttle", "value": "throttle", "set": 0, "offset": 1.0, "fmax":  1.0}
+        ]
+    },
+
+    {
+        "name": "collectiveRotor",
+        "type": "engine",
+        "rotation": [0, 0, 0],
+        "position": [0, 0, 1.8],
+        "thrust": 20000,
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        },
+        "animations": [
+            {"type": "throttle", "value": "throttle", "ratio": 0.0, "offset": 1, "fmax":  1},
+            {"type": "pitch", "value": "throttle", "ratio": 1, "offset": 0.5}
+        ]
+    },
+
+    {
+        "name": "tailVerticalAirfoil",
+        "type": "airfoil",
+		"position": [0, -5.5, 0.6],
+        "area": 1,
+        "forceDirection": "X",
+        "points": {
+        	"forceSourcePoint": [0, 0, 0]
+        }
+    },
+
+    {
+        "name": "tailHorizontalAirfoil",
+        "type": "airfoil",
+        "position": [0, -4.5, 0.5],
+        "area": 0.5,
+        "forceDirection": "Z",
+        "points": {
+            "forceSourcePoint": [0, 0, 0]
+        }
+    },
+        {
+            "name": "rudderL",
+            "type": "airfoil",
+            "node": "leftRudder",
+            "area": 1.4,
+            "forceDirection": "X",
+            "points": {
+                "forceSourcePoint": [0, -0.8, 0.7]
+            },
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "yaw", "ratio": -30}
+            ]
+        },
+        {
+            "name": "rudderR",
+            "type": "airfoil",
+            "node": "rightRudder",
+            "area": 1.4,
+            "forceDirection": "X",
+            "points": {
+                "forceSourcePoint": [0, -0.8, 0.7]
+            },
+            "animations": [
+                {"type": "rotate", "axis": "Z", "value": "yaw", "ratio": -30}
+            ]
+        },
+        {
+            "name": "elevatorLeft",
+            "type": "none",
+            "node": "leftElevator",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "pitch", "ratio": 30}
+            ]
+        },
+        {
+            "name": "elevatorRight",
+            "type": "none",
+            "node": "rightElevator",
+            "animations": [
+                {"type": "rotate", "axis": "X", "value": "pitch", "ratio": 30}
+            ]
+        },
+
+    {
+        "name": "door_slide_left",
+        "type": "none",
+        "node": "leftDoor",
+        "animations": [
+            {"type": "translate", "axis": "Z", "value": "optionalAnimatedPartPosition", "ratio": 0.9},
+            {"type": "translate", "axis": "X", "value": "optionalAnimatedPartPosition", "ratio": -0.05, "delay": -0.9}
+        ]
+    },
+    {
+        "name": "door_slide_right",
+        "type": "none",
+        "node": "rightDoor",
+        "animations": [
+            {"type": "translate", "axis": "Z", "value": "optionalAnimatedPartPosition", "ratio": 0.9},
+            {"type": "translate", "axis": "X", "value": "optionalAnimatedPartPosition", "ratio": 0.05, "delay": -0.9}
+        ]
+    },
+
+
+    {
+        "name": "strobe",
+        "light": "white",
+        "animations": [
+            {"type": "show", "value": "strobe"}
+        ],
+        "position": [-2.5, -7, 1.2]
+    },
+    {
+        "name": "strobe2",
+        "light": "white",
+        "animations": [
+            {"type": "show", "value": "strobe"}
+        ],
+        "position": [2.5, -7, 1.2]
+    },
+    {
+        "name": "strobe3",
+        "light": "red",
+        "animations": [
+            {"type": "show", "value": "strobe2"}
+        ],
+        "position": [0, -1, 2.6]
+    }
+    ],
+	
+
+    "contactProperties": {
+        "wheel": {
+        	"frictionCoef": 10,
+        	"dynamicFriction": 0.01,
+        	"rollingFriction": 0.0001,
+        	"lockSpeed": 0.1,
+        	"damping": 1
+        },
+        "frame": {
+        	"frictionCoef": 2,
+        	"dynamicFriction": 0.01,
+        	
+            "damping": 1
+        },
+	    "airfoil": {
+        	"frictionCoef": 2,
+        	"dynamicFriction": 0.01,
+        	
+            "damping": 1
+        }
+    },
+    
+    "sounds": [
+    	{
+    		"id": "rpm0",
+    		"file": "sounds/ec135/rpm0.ogg",
+    		"effects": {"volume": {"value": "rpm", "ramp": [4500, 5000, 5500, 6000]}}
+    	},
+        {
+            "id": "rpm1",
+            "file": "sounds/ec135/rpm1.ogg",
+            "effects": {"volume": {"value": "rpm", "ramp": [5000, 5500, 10000, 10000]}}
+        },
+        {
+    		"id": "rpm2",
+    		"file": "sounds/ec135/rpm2.ogg",
+    		"effects": {"volume": {"function": "{return geofs.animation.values.rpm * controls.throttle;}", "ramp": [4000, 5000, 10000, 10000]}}
+    	}, 
+    	{
+    		"id": "rpm3",
+    		"file": "sounds/ec135/rpm3.ogg",
+    		"effects": {"volume": {"function": "{return geofs.animation.values.rpm * controls.throttle;}", "ramp": [5000, 6000, 10000, 10000]}}
+    	},
+    	{
+    		"id": "startup",
+    		"file": "sounds/ec135/startup.ogg"
+    	},
+    	{
+    		"id": "shutdown",
+    		"file": "sounds/ec135/shutdown.ogg"
+    	}    	
+    ],
+    
+    "cameras": {
+        "follow": {
+        	"distance": 25
+    	},
+        "cockpit": {
+        	"position": [0.4, 3, 0.4],
+        	"orientation": [0, -10, 0],
+            "FOV": 1.5
+        },
+        "Cabin": {
+            "position": [0.40, 0.3, 0.4],
+            "rotatable": true,
+            "nearClipping": true
+        }
+    },
+
+    "cockpitModel": true,
+    "shadowFile": "shadow.gltf",
+    "shadowBox": [7.5, 7.5]
+}]
